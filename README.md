@@ -4,6 +4,13 @@ Shared element transitions built around [`react-native-shared-element`](https://
 
 This component somewhat simplifys the usage for other libraries or custom screens in your app.
 
+## Installation
+
+```bash
+yarn add shared-element-rn react-native-shared-element
+cd ios && pod install
+```
+
 ## API
 
 `<SharedElements />` will trigger a transition when its `activeIndex` prop changes.
