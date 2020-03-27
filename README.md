@@ -36,7 +36,7 @@ function MySharedElements() {
 function Screen1({ onTransition }) {
   return (
     <View style={{ flex: 1 }}>
-      <TouchableOpacity onTransition={onTransition}>
+      <TouchableOpacity onPress={onTransition}>
         <SharedElement id="image">
           <Image source={{ uri: 'my-image.png' }} style={{ height: 300 }} />
         </SharedElement>
@@ -48,7 +48,7 @@ function Screen1({ onTransition }) {
 function Screen2({ onTransition }) {
   return (
     <View style={{ flex: 1 }}>
-      <TouchableOpacity onTransition={onTransition}>
+      <TouchableOpacity onPress={onTransition}>
         <SharedElement id="image">
           <Image source={{ uri: 'my-image.png' }} style={{ height: 500 }} />
         </SharedElement>
