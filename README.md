@@ -96,3 +96,7 @@ function TransitionBottom({ children }) {
   return <Animated.View style={styles}>{children}</Animated.View>;
 }
 ```
+
+## Roadmap
+
+- gesture handling to dismiss views on swipe

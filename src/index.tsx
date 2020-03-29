@@ -215,7 +215,9 @@ function SharedElementsImpl({
               style={{ ...StyleSheet.absoluteFillObject }}
             >
               <IndexContext.Provider value={index}>
-                <SharedElementScreen>{child}</SharedElementScreen>
+                <SharedElementScreen currentIndex={currentIndex}>
+                  {child}
+                </SharedElementScreen>
               </IndexContext.Provider>
             </View>
           );
@@ -229,20 +231,36 @@ function SharedElementsImpl({
 
 interface ISharedElementScreen {
   children: React.ReactNode;
+  currentIndex: number;
 }
 
-function SharedElementScreen({ children }: ISharedElementScreen) {
+function SharedElementScreen({ children, currentIndex }: ISharedElementScreen) {
   const index = React.useContext(IndexContext);
   const { registerAncestor } = React.useContext(TransitionContext);
 
+  const animatedValue = React.useRef(new Animated.Value(0));
+
+  // prevent initial flash on mount
+  React.useEffect(() => {
+    Animated.timing(animatedValue.current, {
+      toValue: 1,
+      duration: 100,
+    }).start();
+  }, [currentIndex]);
+
   return (
-    <View
-      style={{ flex: 1 }}
+    <Animated.View
       collapsable={false}
-      ref={(ref) => registerAncestor(ref, index)}
+      style={{ flex: 1, opacity: animatedValue }}
     >
-      {children}
-    </View>
+      <View
+        style={{ flex: 1 }}
+        collapsable={false}
+        ref={(ref) => registerAncestor(ref, index)}
+      >
+        {children}
+      </View>
+    </Animated.View>
   );
 }
 
